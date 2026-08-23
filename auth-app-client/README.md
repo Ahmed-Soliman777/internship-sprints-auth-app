@@ -1,36 +1,27 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Auth App Login UI
 
-## Getting Started
+This Next.js client contains a simple responsive login screen for Auth App.
 
-First, run the development server:
+## Login UI Design
+
+- On large screens, the page shows a branding and image section beside the login form.
+- On smaller screens, the branding section is hidden and the form is centered for easier use on mobile.
+- The form includes fields for an email address or mobile number and a password.
+- The blue **Log in** button is the primary action.
+- A secondary **Create new account** link takes users to the registration page.
+- Tailwind CSS utility classes provide the layout, spacing, colors, borders, and responsive behavior.
+
+The main page is in `app/page.tsx`, and the reusable form markup is in
+`components/LoginFormComponent.tsx`. Login imagery and other static assets belong in
+the `public` folder.
+
+## Run Locally
+
+From this folder, install dependencies and start the development server:
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Then open [http://localhost:3000](http://localhost:3000).
