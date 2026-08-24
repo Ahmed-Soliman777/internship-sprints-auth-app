@@ -1,31 +1,15 @@
-## Prisma ORM and PostgreSQL
+## User Module and Database Connection
 
-Prisma ORM has been added to the project to connect the NestJS server to a PostgreSQL database.
+This branch includes a `UserModule` in `src/user`. The user module contains the user controller and service and is imported into `AppModule`.
 
-The Prisma schema is located at `prisma/schema.prisma` and uses the PostgreSQL provider. It defines the `User` model with the following fields:
+The user controller provides these API routes:
 
-- `id`
-- `email`
-- `firstName`
-- `lastName`
-- `password`
+- `POST /api/register` to register a user
+- `POST /api/login` to log in a user
+- `GET /api/users` to get all users
+- `GET /api/user/:id` to get a user by ID
+- `PUT /api/reset-password` to reset a user's password
 
-The database connection is configured with the `DATABASE_URL` environment variable in `prisma.config.ts`. `PrismaService` uses the Prisma PostgreSQL adapter to create the database client, and the generated Prisma client is stored in `src/generated/prisma`.
+The `UserService` uses `PrismaService` to connect to the PostgreSQL database and perform user queries and updates. User passwords are hashed before they are saved, and login and registration return a JWT token.
 
-Database migrations are stored in `prisma/migrations`. To create or apply a migration, run:
-
-```bash
-npx prisma migrate dev
-```
-
-To generate the Prisma client, run:
-
-```bash
-npx prisma generate
-```
-
-To go to Prisma studio, run:
-
-```bash
-npx prisma studio
-```
+The database connection uses the `DATABASE_URL` environment variable. `PrismaService` creates the Prisma client with the PostgreSQL adapter, using the Prisma schema in `prisma/schema.prisma`.
