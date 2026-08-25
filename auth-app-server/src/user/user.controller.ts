@@ -15,6 +15,8 @@ export class UserController {
     const token = await this.userService.register(createUserDto);
     res.cookie('token', token, {
       httpOnly: true,
+      secure: true,
+      sameSite: 'none',
       maxAge: 24 * 60 * 60 * 1000,
     });
     return { message: 'Welcome to auth app' };
@@ -39,6 +41,8 @@ export class UserController {
     const token = await this.userService.login(loginDTO);
     res.cookie('token', token, {
       httpOnly: true,
+      secure: true,
+      sameSite: 'none',
       maxAge: 24 * 60 * 60 * 1000,
     });
     return { message: 'Welcome to auth app' };
