@@ -37,7 +37,7 @@ export class UserService {
     const token = await this.jwtService.signAsync({
       email,
     });
-    return { message: 'Welcome to auth app', token };
+    return { token };
   }
   async encryptPassword(plainText: string, saltRound: number) {
     return await bcrypt.hash(plainText, saltRound);
@@ -90,7 +90,6 @@ export class UserService {
       email: user.email,
     });
     return {
-      message: 'Welcome to auth app',
       token,
     };
   }
