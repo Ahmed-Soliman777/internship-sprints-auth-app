@@ -1,37 +1,33 @@
-## User Module and Database Connection
+# Auth App Server
 
-This branch includes a `UserModule` in `src/user`. The user module contains the user controller and service and is imported into `AppModule`.
+The server is a NestJS backend for the Auth App. It provides authentication
+routes and stores users through the Prisma database service.
 
-The user controller provides these API routes:
+## Authentication Token Cookie
 
-- `POST /api/register` to register a user
-- `POST /api/login` to log in a user
-- `GET /api/users` to get all users
-- `GET /api/user/:id` to get a user by ID
-- `PUT /api/reset-password` to reset a user's password
+The register and login endpoints create a JWT token after successful
+authentication. The controller sends the token in a cookie named `token`.
 
-The `UserService` uses `PrismaService` to connect to the PostgreSQL database and perform user queries and updates. User passwords are hashed before they are saved, and login and registration return a JWT token.
+- The cookie is `httpOnly`.
+- The cookie expires after 24 hours.
+- The logout endpoint clears the `token` cookie.
 
-The database connection uses the `DATABASE_URL` environment variable. `PrismaService` creates the Prisma client with the PostgreSQL adapter, using the Prisma schema in `prisma/schema.prisma`.
+The server uses `cookie-parser` to read cookies and enables CORS credentials
+for the frontend at `http://localhost:3000`.
 
-## Run the Server Locally
+## Authentication Routes
 
-From the `auth-app-server` directory, install the dependencies:
+- `POST /api/register` creates a user and sets the token cookie.
+- `POST /api/login` authenticates a user and sets the token cookie.
+- `POST /api/logout` clears the token cookie.
+
+## Run Locally
+
+From this folder, install dependencies and start the server:
 
 ```bash
 npm install
-```
-
-Set the PostgreSQL connection string in the `DATABASE_URL` environment variable. Then apply the Prisma migrations:
-
-```bash
-npx prisma migrate dev
-```
-
-Start the server in development mode:
-
-```bash
 npm run start:dev
 ```
 
-The server runs locally on `http://localhost:3000`.
+The server runs on `http://localhost:5000`.

@@ -58,10 +58,10 @@ export default function Home() {
 
         <LoginFormComponent />
 
-        {/* <Link
-          href={'/forget-password'}
+        <Link
+          href={'/reset-password'}
           className="inline-block my-5 text-center  w-full py-3 rounded-full cursor-pointer hover:bg-amber-100"
-        >Forgotten password?</Link> */}
+        >Forgotten password?</Link>
         <Link
           href={'/register'}
           className="inline-block my-5 text-center border border-blue-500 text-blue-500 w-full py-3 rounded-full cursor-pointer hover:bg-blue-100"
