@@ -51,6 +51,8 @@ export class UserController {
   logout(@Res({ passthrough: true }) res: Response) {
     res.clearCookie('token', {
       httpOnly: true,
+      secure: true,
+      sameSite: 'none',
     });
     return {
       message: 'Logged out successfully',
