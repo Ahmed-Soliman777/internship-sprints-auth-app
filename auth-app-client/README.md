@@ -1,40 +1,53 @@
 # Auth App Client
 
-The client is a Next.js frontend for the Auth App. It connects to the NestJS
-backend through the API URL configured with `NEXT_PUBLIC_API_URL`.
+The client is a Next.js frontend for the Auth App. It provides the user-facing
+authentication flow and a protected dashboard.
 
-## Register Page UI
+## Features
 
-The register page is available at `/register` and includes:
+- Login page at `/`.
+- Registration page at `/register` with first name, last name, email, and
+	password fields.
+- Password reset page at `/reset-password`.
+- Protected home page at `/home`.
+- Next.js middleware protects `/home` and redirects authenticated users away
+	from authentication pages.
+- Loading states and `react-toastify` success and error notifications.
+- Responsive styling with Tailwind CSS.
 
-- First name and last name fields
-- Email and password fields
-- A **Submit** button with a loading state
-- An **I already have an account** link back to the login page
-- Responsive styling provided by Tailwind CSS
+## API Connection
 
-The page is implemented in `app/register/page.tsx`, with the form in
-`components/RegisterFormComponent.tsx`.
+Set `NEXT_PUBLIC_API_URL` to the API deployment or local API URL. Requests use
+same-origin `/api/*` paths and Next.js rewrites them to this value, allowing the
+httpOnly authentication cookie to remain on the client domain.
 
-## Frontend and Backend Connection
+Create `auth-app-client/.env.local` for local development:
 
-The register and login forms send JSON `POST` requests to the backend routes
-`/api/register` and `/api/login`. Requests use `credentials: 'include'` so the
-authentication cookie returned by the server is included in the browser session.
+```env
+NEXT_PUBLIC_API_URL=https://internship-sprints-auth-app.vercel.app
+```
 
-## Toast Notifications
+Production client: [https://internship-sprints-auth-app-qo63.vercel.app/](https://internship-sprints-auth-app-qo63.vercel.app/)
 
-`react-toastify` displays success and error messages for registration and login.
-The shared `ToastContainer` is mounted in `app/layout.tsx` with a top-center
-position, dark theme, hidden progress bar, and three-second auto-close time.
+Production API: [https://internship-sprints-auth-app.vercel.app](https://internship-sprints-auth-app.vercel.app)
 
 ## Run Locally
 
-From this folder, install dependencies and start the development server:
+The server must be running separately, or `NEXT_PUBLIC_API_URL` can point to the
+deployed API as shown above.
 
 ```bash
 npm install
 npm run dev
 ```
 
-Then open [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:3000](http://localhost:3000).
+
+For a production build:
+
+```bash
+npm run build
+npm run start
+```
+
+Do not commit `.env.local` or production credentials.
