@@ -28,7 +28,7 @@ const ResetPasswordFormComponent = () => {
 
     try {
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/reset-password`, {
+      const response = await fetch('/api/reset-password', {
         method: "PUT",
         body: JSON.stringify({
           email,

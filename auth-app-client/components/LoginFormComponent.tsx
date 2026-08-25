@@ -29,7 +29,7 @@ const LoginFormComponent = () => {
 
         try {
 
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/login`, {
+            const response = await fetch('/api/login', {
                 method: "POST",
                 credentials: 'include',
                 body: JSON.stringify({

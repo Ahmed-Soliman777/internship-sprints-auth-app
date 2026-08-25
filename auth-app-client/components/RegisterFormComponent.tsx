@@ -23,7 +23,7 @@ const RegisterFormComponent = () => {
 
     try {
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/register`, {
+      const response = await fetch('/api/register', {
         method: "POST",
         credentials: 'include',
         body: JSON.stringify({

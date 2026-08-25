@@ -13,7 +13,7 @@ const NavbarComponent = () => {
     async function handleLogout() {
         setIsLoading(true)
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/logout`, {
+            const response = await fetch('/api/logout', {
                 method: "POST",
                 credentials: "include",
                 headers: {

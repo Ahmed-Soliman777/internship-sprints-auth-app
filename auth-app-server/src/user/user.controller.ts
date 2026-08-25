@@ -15,8 +15,8 @@ export class UserController {
     const token = await this.userService.register(createUserDto);
     res.cookie('token', token, {
       httpOnly: true,
-      secure: true,
-      sameSite: 'none',
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
       maxAge: 24 * 60 * 60 * 1000,
     });
     return { message: 'Welcome to auth app' };
@@ -41,8 +41,8 @@ export class UserController {
     const token = await this.userService.login(loginDTO);
     res.cookie('token', token, {
       httpOnly: true,
-      secure: true,
-      sameSite: 'none',
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
       maxAge: 24 * 60 * 60 * 1000,
     });
     return { message: 'Welcome to auth app' };
@@ -51,8 +51,8 @@ export class UserController {
   logout(@Res({ passthrough: true }) res: Response) {
     res.clearCookie('token', {
       httpOnly: true,
-      secure: true,
-      sameSite: 'none',
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
     });
     return {
       message: 'Logged out successfully',
