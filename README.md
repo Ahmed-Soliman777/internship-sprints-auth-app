@@ -1,37 +1,43 @@
-## User Module and Database Connection
+# Auth App
 
-This branch includes a `UserModule` in `src/user`. The user module contains the user controller and service and is imported into `AppModule`.
+This project contains a Next.js frontend and a NestJS backend for user
+registration and authentication.
 
-The user controller provides these API routes:
+## New Features
 
-- `POST /api/register` to register a user
-- `POST /api/login` to log in a user
-- `GET /api/users` to get all users
-- `GET /api/user/:id` to get a user by ID
-- `PUT /api/reset-password` to reset a user's password
+### Client
 
-The `UserService` uses `PrismaService` to connect to the PostgreSQL database and perform user queries and updates. User passwords are hashed before they are saved, and login and registration return a JWT token.
+- The register page is available at `/register`.
+- The register form includes first name, last name, email, and password fields.
+- The client sends register and login requests to the backend using the API URL
+	configured by `NEXT_PUBLIC_API_URL`.
+- Requests include credentials so the browser can receive and send the
+	authentication cookie.
+- `react-toastify` displays registration and login success or error messages.
 
-The database connection uses the `DATABASE_URL` environment variable. `PrismaService` creates the Prisma client with the PostgreSQL adapter, using the Prisma schema in `prisma/schema.prisma`.
+### Server
 
-## Run the Server Locally
+- The register and login routes create JWT authentication tokens.
+- Tokens are sent in an `httpOnly` cookie named `token` with a 24-hour lifetime.
+- The logout route clears the token cookie.
+- CORS is configured to allow credentialed requests from the client at
+	`http://localhost:3000`.
 
-From the `auth-app-server` directory, install the dependencies:
+## Run the Applications
+
+Start the backend from `auth-app-server`:
 
 ```bash
 npm install
-```
-
-Set the PostgreSQL connection string in the `DATABASE_URL` environment variable. Then apply the Prisma migrations:
-
-```bash
-npx prisma migrate dev
-```
-
-Start the server in development mode:
-
-```bash
 npm run start:dev
 ```
 
-The server runs locally on `http://localhost:3000`.
+Start the frontend from `auth-app-client`:
+
+```bash
+npm install
+npm run dev
+```
+
+The client runs at `http://localhost:3000` and the server runs at
+`http://localhost:5000`.

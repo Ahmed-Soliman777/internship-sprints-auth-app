@@ -1,19 +1,32 @@
-# Auth App Login UI
+# Auth App Client
 
-This Next.js client contains a simple responsive login screen for Auth App.
+The client is a Next.js frontend for the Auth App. It connects to the NestJS
+backend through the API URL configured with `NEXT_PUBLIC_API_URL`.
 
-## Login UI Design
+## Register Page UI
 
-- On large screens, the page shows a branding and image section beside the login form.
-- On smaller screens, the branding section is hidden and the form is centered for easier use on mobile.
-- The form includes fields for an email address or mobile number and a password.
-- The blue **Log in** button is the primary action.
-- A secondary **Create new account** link takes users to the registration page.
-- Tailwind CSS utility classes provide the layout, spacing, colors, borders, and responsive behavior.
+The register page is available at `/register` and includes:
 
-The main page is in `app/page.tsx`, and the reusable form markup is in
-`components/LoginFormComponent.tsx`. Login imagery and other static assets belong in
-the `public` folder.
+- First name and last name fields
+- Email and password fields
+- A **Submit** button with a loading state
+- An **I already have an account** link back to the login page
+- Responsive styling provided by Tailwind CSS
+
+The page is implemented in `app/register/page.tsx`, with the form in
+`components/RegisterFormComponent.tsx`.
+
+## Frontend and Backend Connection
+
+The register and login forms send JSON `POST` requests to the backend routes
+`/api/register` and `/api/login`. Requests use `credentials: 'include'` so the
+authentication cookie returned by the server is included in the browser session.
+
+## Toast Notifications
+
+`react-toastify` displays success and error messages for registration and login.
+The shared `ToastContainer` is mounted in `app/layout.tsx` with a top-center
+position, dark theme, hidden progress bar, and three-second auto-close time.
 
 ## Run Locally
 
