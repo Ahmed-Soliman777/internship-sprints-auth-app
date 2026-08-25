@@ -8,7 +8,10 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.use(cookieParser());
   app.enableCors({
-    origin: `${process.env.CLIENT_URL}`,
+    origin: [
+      'http://localhost:3000',
+      'https://internship-sprints-auth-app-qo63.vercel.app',
+    ],
     credentials: true,
   });
   app.useGlobalPipes(
